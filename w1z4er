@@ -1,0 +1,28 @@
+local player = game.Players.LocalPlayer
+local char = player.Character or player.CharacterAdded:Wait()
+local humanoid = char:WaitForChild("Humanoid")
+local speedButton = script.Parent:WaitForChild("SpeedButton")
+local loadingLabel = script.Parent:WaitForChild("TextLabel")
+local defaultWalkSpeed = 16
+local fastWalkSpeed = 50
+speedButton.Size = UDim2.new(0, 200, 0, 50)
+speedButton.Position = UDim2.new(0.5, -100, 0.5, -25)
+speedButton.Text = "Increase Speed"
+speedButton.BackgroundColor3 = Color3.fromRGB(0, 170, 0)
+loadingLabel.Text = "Loading..."
+loadingLabel.Position = UDim2.new(0.5, -50, 0.45, -25)
+loadingLabel.Visible = true
+local function setWalkSpeed()
+    humanoid.WalkSpeed = fastWalkSpeed
+    loadingLabel.Visible = false
+    speedButton.Text = "Speed Increased!"
+end
+
+local function loadingAnimation()
+    loadingLabel.Visible = true
+    wait(2) -- Задержка загрузки
+    setWalkSpeed()
+end
+
+
+speedButton.MouseButton1Click:Connect(loadingAnimation)
